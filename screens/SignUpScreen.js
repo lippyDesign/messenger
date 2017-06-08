@@ -1,15 +1,15 @@
-// 
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import CreateUserForm from '../components/auth/CreateUserForm';
 
 export default class extends Component {
-  onEmailAndPasswordSignUp = ({ email, password, confirmPassword }) => {
-    console.log({ email, password, confirmPassword });
-  }
+  // add property to the class for react navigation to use as configurations to cutomize the route
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Sign Up',
+  });
   render() {
     return <View style={styles.container}>
-      <CreateUserForm onCreateUser={this.onEmailAndPasswordSignUp} errorMessege='Error message signing up' />
+      <CreateUserForm navigation={this.props.navigation} />
     </View>;
   }
 }
