@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import { CREATE_OR_SIGNIN_USER_SUCCESS, CREATE_OR_SIGNIN_USER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOADING } from './types';
 
-export const createUser = ({ email, password }) => async dispatch => {
+export const createUser = ({ email, password, navigation }) => async dispatch => {
   dispatch({ type: LOADING });
   try {
     let user = await firebase.auth().createUserWithEmailAndPassword(email, password);

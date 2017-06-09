@@ -9,6 +9,7 @@ import firebaseConfig from './firebaseConfig';
 import SignUpScreen from './screens/SignUpScreen';
 import SignInScreen from './screens/SignInScreen';
 import DashboardScreen from './screens/DashboardScreen';
+import ComposeScreen from './screens/ComposeScreen';
 
 class App extends React.Component {
   componentDidMount() {
@@ -17,16 +18,16 @@ class App extends React.Component {
   render() {
     const MainNavigator = TabNavigator({
       //welcome: { screen: WelcomeScreen },
-      auth: {
-        screen: StackNavigator({
-          login: { screen: SignInScreen },
-          signup: { screen: SignUpScreen }
-        })
-      },
+      // auth: {
+      //   screen: StackNavigator({
+      //     login: { screen: SignInScreen },
+      //     signup: { screen: SignUpScreen }
+      //   })
+      // },
       main: {
         screen: TabNavigator({
           dashboard: { screen: DashboardScreen },
-          // deck: { screen: DeckScreen },
+          compose: { screen: ComposeScreen },
           // review: {
           //   screen: StackNavigator({
           //     review: { screen: ReviewScreen },
