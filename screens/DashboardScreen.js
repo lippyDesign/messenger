@@ -34,7 +34,7 @@ class DashboardScreen extends Component {
 
 const styles = {
   containerStyle: { flex: 1, marginTop: 30 }, //borderColor: 'green', borderWidth: 1
-  titleTextStyle: { textAlign: 'center', fontWeight: 'bold', fontSize: 18 }
+  titleTextStyle: { textAlign: 'center', fontWeight: 'bold', fontSize: 18, marginTop: 10 }
 };
 
 export default connect(null, null)(DashboardScreen);

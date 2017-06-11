@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ListView } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Badge } from 'react-native-elements';
 
 export default class extends Component {
   componentWillMount() {
@@ -21,6 +21,7 @@ export default class extends Component {
     return <ListItem
       roundAvatar
       key={rowData.uid}
+      badge={{ element: <Badge value="2" wrapperStyle={{ position: 'absolute', right: 30, height: '100%', justifyContent: 'center' }} />}}
       title={rowData.displayName}
       avatar={{uri:rowData.photo}}
     />
