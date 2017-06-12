@@ -1,11 +1,35 @@
 import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
-import { CREATE_OR_SIGNIN_USER_SUCCESS, CREATE_OR_SIGNIN_USER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOADING } from './types';
+import axios from 'axios';
+import { USERNAME_TEXT_CHANGE, CHECKING_USERNAME, USERNAME_TEST_RESULT, CREATE_OR_SIGNIN_USER_SUCCESS, CREATE_OR_SIGNIN_USER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOADING } from './types';
 
-export const createUser = ({ email, password, navigation }) => async dispatch => {
+const ROOT_URL = 'https://us-central1-messenger-1a6ff.cloudfunctions.net';
+
+export const onUsernameTextChange = username => async dispatch => {
+  // send new username text to reducer
+  dispatch({ type: USERNAME_TEXT_CHANGE, payload: username });
+  // send checking username signal to the reducer
+  dispatch({ type: CHECKING_USERNAME, payload: true });
+  // check if username already exists
+  firebase.database().ref(`users/${username}`).once('value')
+    .then(snapshot => {
+      if (snapshot.exists()) {
+          dispatch({ type: USERNAME_TEST_RESULT, payload: 'Not Available' });
+      } else {
+          dispatch({ type: USERNAME_TEST_RESULT, payload: 'Available' });
+      }
+    })
+    .catch(error => console.log(error));
+}
+
+export const createUser = ({ email, password, uid, navigation }) => async dispatch => {
   dispatch({ type: LOADING });
   try {
-    let user = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    // attempt to create user
+    let user = await axios.post(`${ROOT_URL}/createUser`, { email, password, uid });
+    // attempt to save additional user info into database
+    await firebase.database().ref(`users/${uid}`).set({ email, photo: '' });
+    // if user was created and saved into database, we dispatch the success action
     onUserSuccess(dispatch, user, navigation);
   } catch (error) {
     dispatch({ type: CREATE_OR_SIGNIN_USER_FAIL, payload: error });

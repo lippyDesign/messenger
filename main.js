@@ -10,6 +10,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import SignInScreen from './screens/SignInScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import ComposeScreen from './screens/ComposeScreen';
+import PickUsernameScreen from './screens/PickUsernameScreen';
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,12 +19,13 @@ class App extends React.Component {
   render() {
     const MainNavigator = TabNavigator({
       //welcome: { screen: WelcomeScreen },
-      // auth: {
-      //   screen: StackNavigator({
-      //     login: { screen: SignInScreen },
-      //     signup: { screen: SignUpScreen }
-      //   })
-      // },
+      auth: {
+        screen: StackNavigator({
+          login: { screen: SignInScreen },
+          pickUsername: { screen: PickUsernameScreen },
+          signup: { screen: SignUpScreen }
+        })
+      },
       main: {
         screen: TabNavigator({
           dashboard: { screen: DashboardScreen },

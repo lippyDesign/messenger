@@ -25,7 +25,8 @@ class CreateUserForm extends Component {
     if (password !== confirmPassword) return this.setState({ passwordError: 'Passwords do not match', confirmPasswordError: 'Passwords do not match'});
     // if all inputs are validated, call the createUser function from props
     if ( emailValid && passwordValid && confirmPasswordValid) {
-      this.props.createUser({ email, password, navigation: this.props.navigation });
+      const uid = this.props.username;
+      this.props.createUser({ email, password, uid, navigation: this.props.navigation });
       this.setState({ emailError: '', passwordError: '', confirmPasswordError: '' });
     }
   }
@@ -54,8 +55,8 @@ class CreateUserForm extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.auth)
-  return { errorMessage: state.auth.errorMessage, loading: state.auth.loading }
+  const { errorMessage, loading, usernameText } = state.auth;
+  return { errorMessage, loading, username: usernameText };
 };
 
 export default connect(mapStateToProps, { createUser })(CreateUserForm);
