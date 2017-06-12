@@ -22,7 +22,7 @@ class DashboardScreen extends Component {
       </View>
       <View style={{ flex: 1 }}>
         <Text style={styles.titleTextStyle}>Favorites</Text>
-        <People people={people} />
+        <People people={people} large />
       </View>
       <View style={{ flex: 3}}>
         <Text style={styles.titleTextStyle}>Recent</Text>

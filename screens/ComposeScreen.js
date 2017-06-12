@@ -8,7 +8,7 @@ const people = [{ uid: 1, displayName: 'Hrusha', photo: 'http://blogthumb2.naver
 class ComposeScreen extends Component {
   render() {
     return <View style={styles.containerStyle}>
-      <People people={people} />
+      <People people={people} small />
     </View>;
   }
 }

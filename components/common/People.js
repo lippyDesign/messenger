@@ -8,9 +8,11 @@ export default class extends Component {
   renderPeople() {
     const { avatarAndTextBoxStyle, avatarWrapper, textWrapper } = styles;
     return this.props.people.map(({ uid, displayName, photo }) => {
-      return <View key={uid} style={avatarAndTextBoxStyle}>
+      return <View key={uid} style={[avatarAndTextBoxStyle, {height: this.props.large ? 94 : this.props.medium ? 70 : 50}]}>
         <Avatar
-          large
+          large={this.props.large}
+          medium={this.props.medium}
+          small={this.props.small}
           rounded
           source={{uri: photo}}
           title={displayName.substring(0,2)}
@@ -31,5 +33,5 @@ export default class extends Component {
 
 const styles = {
   containerStyle: { flex: 1, marginTop: 10 },
-  avatarAndTextBoxStyle: {justifyContent: 'space-between', alignItems: 'center', height: 94, width: SCREEN_WIDTH / 4 }
+  avatarAndTextBoxStyle: {justifyContent: 'space-between', alignItems: 'center', width: SCREEN_WIDTH / 4 }
 };
