@@ -11,6 +11,7 @@ export const onUsernameTextChange = username => async dispatch => {
   // send checking username signal to the reducer
   dispatch({ type: CHECKING_USERNAME, payload: true });
   // check if username already exists
+  if (username.length < 2) return dispatch({ type: USERNAME_TEST_RESULT, payload: 'Not Available' });
   firebase.database().ref(`users/${username}`).once('value')
     .then(snapshot => {
       if (snapshot.exists()) {
@@ -45,6 +46,20 @@ export const signInUser = ({ email, password, navigation }) => async dispatch =>
     dispatch({ type: CREATE_OR_SIGNIN_USER_FAIL, payload: error });
   }
 };
+
+const testUsername = (dispatch, username) => {
+  // username must be at least 2 characters long
+  if (username.length < 2) return dispatch({ type: USERNAME_TEST_RESULT, payload: 'Not Available' });
+  firebase.database().ref(`users/${username}`).once('value')
+    .then(snapshot => {
+      if (snapshot.exists()) {
+          dispatch({ type: USERNAME_TEST_RESULT, payload: 'Not Available' });
+      } else {
+          dispatch({ type: USERNAME_TEST_RESULT, payload: 'Available' });
+      }
+    })
+    .catch(error => console.log(error));
+}
 
 const onUserSuccess = (dispatch, user, navigation) => {
   dispatch({ type: CREATE_OR_SIGNIN_USER_SUCCESS, payload: user });

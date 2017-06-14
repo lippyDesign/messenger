@@ -19,13 +19,13 @@ class App extends React.Component {
   render() {
     const MainNavigator = TabNavigator({
       //welcome: { screen: WelcomeScreen },
-      auth: {
-        screen: StackNavigator({
-          login: { screen: SignInScreen },
-          pickUsername: { screen: PickUsernameScreen },
-          signup: { screen: SignUpScreen }
-        })
-      },
+      // auth: {
+      //   screen: StackNavigator({
+      //     login: { screen: SignInScreen },
+      //     pickUsername: { screen: PickUsernameScreen },
+      //     signup: { screen: SignUpScreen }
+      //   })
+      // },
       main: {
         screen: TabNavigator({
           dashboard: { screen: DashboardScreen },
