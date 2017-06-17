@@ -6,9 +6,9 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class extends Component {
   renderPeople() {
-    const { avatarAndTextBoxStyle, avatarWrapper, textWrapper } = styles;
+    const { avatarAndTextBoxStyle } = styles;
     return this.props.people.map(({ uid, displayName, photo }) => {
-      return <View key={uid} style={[avatarAndTextBoxStyle, {height: this.props.large ? 94 : this.props.medium ? 70 : 50}]}>
+      return <View key={uid} style={avatarAndTextBoxStyle}>
         <Avatar
           large={this.props.large}
           medium={this.props.medium}
@@ -18,8 +18,8 @@ export default class extends Component {
           title={displayName.substring(0,2)}
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
-          containerStyle={{ width: 34 }}
-          overlayContainerStyle={{ width: 34 }}
+          containerStyle={{ width: 34, height: 34 }}
+          overlayContainerStyle={{ width: 34, height:34 }}
         />
         <Text>{displayName}</Text>
       </View>
@@ -27,11 +27,15 @@ export default class extends Component {
   }
 
   render() {
-    return <ScrollView horizontal style={styles.containerStyle}>{this.renderPeople()}</ScrollView>;
+    return <ScrollView style={styles.wrapperStyle} horizontal>{this.renderPeople()}</ScrollView>;
   }
 }
 
 const styles = {
-  containerStyle: { flex: 1, marginTop: 10 },
-  avatarAndTextBoxStyle: {justifyContent: 'space-between', alignItems: 'center', width: SCREEN_WIDTH / 4 }
+  wrapperStyle: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    //height: 70 //this.props.large ? 94 : this.props.medium ? 70 : 50
+  },
+  avatarAndTextBoxStyle: { justifyContent: 'center', alignItems: 'center', width: SCREEN_WIDTH / 4 }
 };

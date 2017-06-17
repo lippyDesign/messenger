@@ -6,3 +6,4 @@ export const CREATE_OR_SIGNIN_USER_FAIL = 'CREATE_OR_SIGNIN_USER_FAIL';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOADING = 'LOADING';
+export const MESSAGE_TEXT = 'MESSAGE_TEXT';
